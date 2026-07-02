@@ -1,0 +1,27 @@
+-- CreateEnum
+CREATE TYPE "JobStatus" AS ENUM ('PENDING', 'DELAYED', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELLED');
+
+-- CreateEnum
+CREATE TYPE "Priority" AS ENUM ('CRITICAL', 'HIGH', 'MEDIUM', 'LOW');
+
+-- CreateEnum
+CREATE TYPE "JobType" AS ENUM ('SEND_EMAIL', 'GENERATE_PDF', 'RESIZE_IMAGE', 'TRANSCODE_VIDEO', 'CALL_WEBHOOK', 'SEND_NOTIFICATION', 'PROCESS_PAYMENT', 'GENERATE_REPORT');
+
+-- CreateTable
+CREATE TABLE "Job" (
+    "id" TEXT NOT NULL,
+    "status" "JobStatus" NOT NULL DEFAULT 'PENDING',
+    "priority" "Priority" NOT NULL DEFAULT 'LOW',
+    "type" "JobType" NOT NULL,
+    "payload" JSONB NOT NULL,
+    "attempts" INTEGER NOT NULL DEFAULT 0,
+    "maxAttempts" INTEGER NOT NULL DEFAULT 5,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "startedAt" TIMESTAMP(3),
+    "completedAt" TIMESTAMP(3),
+    "runAt" TIMESTAMP(3),
+    "lastError" TEXT,
+
+    CONSTRAINT "Job_pkey" PRIMARY KEY ("id")
+);
