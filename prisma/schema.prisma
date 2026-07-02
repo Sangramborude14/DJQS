@@ -11,3 +11,46 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Job {
+  id String @id @default(uuid())
+  status JobStatus @default(PENDING)
+  priority Priority @default(LOW)
+  type JobType
+  payload Json 
+  attempts Int @default(0)
+  maxAttempts Int @default(5)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  startedAt DateTime?
+  completedAt DateTime?
+  runAt DateTime?
+  lastError String?
+}
+
+enum JobStatus {
+  PENDING
+  DELAYED
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum Priority {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum JobType {
+  SEND_EMAIL
+  GENERATE_PDF
+  RESIZE_IMAGE
+  TRANSCODE_VIDEO
+  CALL_WEBHOOK
+  SEND_NOTIFICATION
+  PROCESS_PAYMENT
+  GENERATE_REPORT
+}
