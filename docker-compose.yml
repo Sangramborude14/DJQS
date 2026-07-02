@@ -1,0 +1,17 @@
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: job_queue_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password@123
+      POSTGRES_DB: job_queue
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
