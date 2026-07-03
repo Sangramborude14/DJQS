@@ -15,4 +15,4 @@ healthRouter.get("/health",  (req,res) => {
     })
 });
 
-module.exports = healthRouter;
+export default healthRouter;
