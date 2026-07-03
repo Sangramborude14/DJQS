@@ -1,23 +1,8 @@
-interface CreateJobRequest {
-    type:JobType;
-    priority?: Priority;
-    payload: unknown;
-    runAt?: Date;
-}
-enum Priority {
-  CRITICAL,
-  HIGH,
-  MEDIUM,
-  LOW,
-}
+import app from "./app.js";
+import { config } from "./config/env.js";
 
-enum JobType {
-  SEND_EMAIL,
-  GENERATE_PDF,
-  RESIZE_IMAGE,
-  TRANSCODE_VIDEO,
-  CALL_WEBHOOK,
-  SEND_NOTIFICATION,
-  PROCESS_PAYMENT,
-  GENERATE_REPORT,
-}
+const  server = app.listen(config.port, () => {
+console.log(`server running at http://localhost:${config.port}`);
+});
+export default server;
+

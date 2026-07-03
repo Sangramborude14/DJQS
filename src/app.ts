@@ -1,10 +1,5 @@
 import express from 'express';
 const app = express();
+app.use(express.json())
+export default app;
 
-const router = express.Router();
-
-const PORT = 3000;
-const host = 'http://localhost'
-app.listen(PORT, () => {
-    console.log(`server running at ${host}:${PORT}`)
-})
