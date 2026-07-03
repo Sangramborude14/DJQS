@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-const jobSchema = z.object({
+export const createJobSchema = z.object({
     type: z.enum([
         "SEND_EMAIL",
         "GENERATE_PDF",
@@ -15,3 +15,5 @@ const jobSchema = z.object({
     priority: z.enum(["CRITICAL","HIGH","MEDIUM","LOW"]).default("LOW"),
     runAt: z.coerce.date(),
 })
+
+export type CreateJobRequest = z.infer<typeof createJobSchema> 
