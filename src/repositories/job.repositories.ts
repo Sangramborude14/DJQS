@@ -30,7 +30,7 @@ async fetchAndLockNextJob() {
     const jobs = await tx.$queryRaw<Array<{id: string}>>`
     SELECT id FROM "Job"
     WHERE "status" = 'PENDING' :: "JobStatus"
-    AND ("runAt" is NULL OR runAt <= ${now})
+    AND ("runAt" IS NULL OR runAt <= ${now})
     ORDER BY 
     CASE "priority"
         WHEN 'CRITICAL' :: "Priority" THEN 1
