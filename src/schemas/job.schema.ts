@@ -13,7 +13,7 @@ export const createJobSchema = z.object({
     ]),
     payload: z.unknown(),
     priority: z.enum(["CRITICAL","HIGH","MEDIUM","LOW"]).default("LOW"),
-    runAt: z.coerce.date(),
+    runAt: z.coerce.date().optional(),
 })
 
 export type CreateJobRequest = z.infer<typeof createJobSchema> 
